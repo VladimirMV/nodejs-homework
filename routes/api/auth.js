@@ -20,7 +20,7 @@ router.get("/current", authenticate, AuthController.getCurrent);
 router.post("/logout", authenticate, AuthController.logout);
 
 router.patch(
-  "/users",
+  "/user",
   authenticate,
   validateBody(schemas.updateSubscriptionSchema),
   AuthController.updateSubscription

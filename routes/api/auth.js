@@ -3,7 +3,7 @@ const { Router } = require("express");
 const { schemas } = require("../../models/user");
 const { validateBody } = require("../../decorators");
 const AuthController = require("../../controllers/auth");
-const { authenticate } = require("../../middlewares");
+const { authenticate, upload } = require("../../middlewares");
 
 const router = Router();
 // console.log("Зашел в роутер");
@@ -19,6 +19,12 @@ router.get("/current", authenticate, AuthController.getCurrent);
 
 router.post("/logout", authenticate, AuthController.logout);
 
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  AuthController.updateAvatar
+);
 router.patch(
   "/user",
   authenticate,
